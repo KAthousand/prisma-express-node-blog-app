@@ -1,0 +1,13 @@
+.comment-card {
+  border: 1px solid grey;
+  border-top: none;
+  height: 150px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  padding-left: 5%;
+}
+
+/* .comment-card-extra {
+  border-top: 1px solid grey;
+} */

@@ -1,0 +1,9 @@
+.layout {
+  padding-bottom: 2vh;
+  height: 100vh;
+}
+
+.layout-children {
+  height: 90vh;
+  overflow-y: scroll;
+}

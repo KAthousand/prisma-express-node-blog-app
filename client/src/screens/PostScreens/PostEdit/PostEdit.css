@@ -1,0 +1,14 @@
+.post-detail-header input {
+  width: 80%;
+  margin-top: 2%;
+}
+
+.post-detail-body textarea {
+  height: 100%;
+  width: 100%;
+}
+
+.post-edit-button {
+  width: 50%;
+  margin: 4% auto;
+}

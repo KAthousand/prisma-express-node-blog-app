@@ -1,0 +1,16 @@
+.header-container {
+  height: 8vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 5%;
+  background-color: lightgrey;
+  border-bottom: 1px solid grey;
+}
+
+.header-content {
+  /* border: 1px solid green; */
+  width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+}

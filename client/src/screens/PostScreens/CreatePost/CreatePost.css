@@ -1,0 +1,48 @@
+.create-form-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.create-form {
+  border: 1px solid grey;
+  height: 60%;
+  width: 50%;
+  text-align: center;
+  position: relative;
+}
+
+.create-form h1 {
+  border-bottom: 1px solid grey;
+  padding: 2%;
+}
+
+.create-form form {
+  height: 80%;
+  padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: left;
+}
+
+.create-form input {
+  margin: 2% 5%;
+  width: 90%;
+}
+
+.create-form textarea {
+  margin: 2% 5%;
+  height: 50%;
+  width: 90%;
+  font-family: sans-serif;
+}
+
+.create-form button {
+  margin: 0 auto;
+  width: 30%;
+}
