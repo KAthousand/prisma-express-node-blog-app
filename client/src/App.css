@@ -25,23 +25,19 @@ a:visited {
 }
 
 .error-container {
-  /* color: red; */
-  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   padding: 2%;
-  align-self: flex-end;
-  /* position: absolute; */
-  /* bottom: 6%; */
-  /* left: 0; */
 }
 
 .error {
-  /* border: 1px solid blue; */
   color: red;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .error h6 {

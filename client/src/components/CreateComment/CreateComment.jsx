@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { createComment } from '../../services/comments';
-import { getOnePost} from '../../services/posts'
+import { getOnePost } from '../../services/posts'
 import './CreateComment.css'
 
 function CreateComment(props) {
-  const { currentUser, postId, setPost } = props;
+  const { currentUser, postId, setPost, error, setError } = props;
   const [formData, setFormData] = useState({
     content: '',
     userId: null,
@@ -17,16 +17,23 @@ function CreateComment(props) {
       setFormData(prevState => ({
         ...prevState, userId: currentUser.id, postId: Number(postId)
       }))
-    } 
-  },[currentUser, postId])
+    }
+  }, [currentUser, postId]);
+
   const newComment = async (formData) => {
-    await createComment(formData);
-    const post = await getOnePost(postId);
+    try {
+      await createComment(formData);
+      const post = await getOnePost(postId);
       const date = `${post.createdAt}`
       const replaceDate = new Date(Date.parse(`${date}`));
       const newDate = replaceDate.toLocaleString();
       setPost(post)
       setPost((prevState) => ({ ...prevState, createdAt: newDate }))
+      setError(null);
+    } catch (error) {
+      const errorMsgArr = Object.values(error.response.data);
+      setError(errorMsgArr)
+    }
   }
 
   const handleChange = (e) => {
@@ -36,7 +43,7 @@ function CreateComment(props) {
       [name]: value
     }))
   }
-  
+
 
   return (
     <div className='create-comment-container'>
@@ -59,6 +66,13 @@ function CreateComment(props) {
         />
         <button>Submit</button>
       </form>
+      {error &&
+        <div className='error-container'>
+          <div className='error'>
+            <h6>{error}</h6>
+          </div>
+        </div>
+      }
     </div>
   );
 }

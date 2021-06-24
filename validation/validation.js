@@ -37,7 +37,7 @@ const postValidationRules = [
 const commentValidationRules = [
   body('content')
     .isLength({ min: 1 })
-    .withMessage('Content cannot be blank'),
+    .withMessage('Comment cannot be blank'),
 ]
 
 const simpleValidation = validationResult.withDefaults({

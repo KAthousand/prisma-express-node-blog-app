@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import CommentCard from '../../../components/CommentCard/CommentCard';
 import CreateComment from '../../../components/CreateComment/CreateComment';
@@ -8,8 +8,8 @@ import "./PostDetail.css"
 function PostDetail(props) {
   const [post, setPost] = useState(null);
   const { id } = useParams()
-  const { destroyPost, currentUser} = props;
-  
+  const { destroyPost, currentUser, error, setError } = props;
+
   useEffect(() => {
     const fetchPost = async () => {
       if (!post) {
@@ -39,22 +39,24 @@ function PostDetail(props) {
             <div className='post-detail-body'>
               <p>{post.content}</p>
             </div>
-            {currentUser && 
-              (post.user.id === currentUser.id)  ? (
-                <div className='post-detail-update'>
-                  <Link to={`/${id}/edit`} ><h6>Edit Post</h6></Link>
-                  <button
-                    onClick={() => destroyPost(id)}
-                  ><h6>Delete Post</h6></button>
-                </div>
-              ):("")
+            {currentUser &&
+              (post.user.id === currentUser.id) ? (
+              <div className='post-detail-update'>
+                <Link to={`/${id}/edit`} ><h6>Edit Post</h6></Link>
+                <button
+                  onClick={() => destroyPost(id)}
+                ><h6>Delete Post</h6></button>
+              </div>
+            ) : ("")
             }
-          
+
             {currentUser && (
               <CreateComment
                 currentUser={currentUser}
                 postId={id}
                 setPost={setPost}
+                error={error}
+                setError={setError}
               />
             )}
             <div className='post-detail-extra'>
@@ -80,9 +82,9 @@ function PostDetail(props) {
           </div>
         </>
       ) : (
-          <div>
-            <h1>Loading...</h1>
-          </div>
+        <div>
+          <h1>Loading...</h1>
+        </div>
       )}
     </div>
   );

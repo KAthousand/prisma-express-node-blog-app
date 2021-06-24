@@ -2,24 +2,23 @@ import { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Posts from '../../screens/PostScreens/Posts/Posts';
 import CreatePost from "../../screens/PostScreens/CreatePost/CreatePost"
-import {createPost, getAllPosts, deletePost, updatePost} from '../../services/posts'
+import { createPost, getAllPosts, deletePost, updatePost } from '../../services/posts'
 import './PostsContainer.css'
 import PostDetail from '../../screens/PostScreens/PostDetail/PostDetail';
 import PostEdit from '../../screens/PostScreens/PostEdit/PostEdit';
 
 function PostsContainer(props) {
   const [posts, setPosts] = useState([]);
-  const [error, setError] = useState([])
   const history = useHistory();
-  const { currentUser } = props;
+  const { currentUser, error, setError } = props;
 
   useEffect(() => {
     const fetchPosts = async () => {
-        const allPosts = await getAllPosts();
-        setPosts(allPosts)
+      const allPosts = await getAllPosts();
+      setPosts(allPosts)
     }
     fetchPosts();
-  },[])
+  }, [])
 
   const resetPosts = async () => {
     const resetPosts = await getAllPosts();
@@ -78,6 +77,8 @@ function PostsContainer(props) {
           editPost={editPost}
           destroyPost={destroyPost}
           posts={posts}
+          error={error}
+          setError={setError}
         />
       </Route>
       <Route path='/'>

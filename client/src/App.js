@@ -6,7 +6,7 @@ import Layout from './screens/shared/Layout/Layout';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import {loginUser, registerUser, removeToken, verifyUser} from './services/auth'
+import { loginUser, registerUser, removeToken, verifyUser } from './services/auth'
 
 import './App.css';
 
@@ -23,7 +23,7 @@ function App() {
     }
     handleVerify()
   }, [])
-  
+
   const handleLogin = async (formData) => {
     try {
       const currentUser = await loginUser(formData);
@@ -31,15 +31,22 @@ function App() {
       setError(null)
       history.push('/')
     } catch (error) {
-      const errorMsgArr = [Object.values(error.response.data)];
+      const errorMsgArr = Object.values(error.response.data);
       setError(errorMsgArr)
     }
   }
 
   const handleRegister = async (formData) => {
-    const currentUser = await registerUser(formData);
-    setCurrentUser(currentUser);
-    history.push('/')
+    try {
+      const currentUser = await registerUser(formData);
+      setCurrentUser(currentUser);
+      setError(null)
+      history.push('/')
+    } catch (error) {
+      const errorMsgArr = Object.values(error.response.data);
+      setError(errorMsgArr)
+    }
+
   }
 
   const handleLogout = () => {
@@ -51,23 +58,23 @@ function App() {
 
   return (
 
-<Layout
+    <Layout
       currentUser={currentUser}
       handleLogout={handleLogout}
     >
       <Switch>
         <Route path='/login'>
-          <Login handleLogin={handleLogin} error={error}/>
+          <Login handleLogin={handleLogin} error={error} />
         </Route>
         <Route path='/register'>
-          <Register handleRegister={handleRegister}/>
+          <Register handleRegister={handleRegister} error={error} />
         </Route>
         <Route path='/'>
-          <PostsContainer currentUser={currentUser}/>
+          <PostsContainer currentUser={currentUser} error={error} setError={setError} />
         </Route>
       </Switch>
     </Layout>
-    
+
   );
 }
 

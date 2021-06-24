@@ -28,7 +28,7 @@ function PostEdit(props) {
     fetchPost();
   }, [id, currentUser])
 
-  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +40,7 @@ function PostEdit(props) {
 
   return (
     <div className='post-detail-container'>
-      { post ? (
+      {post ? (
         <form className='post-detail-content'
           onSubmit={(e) => {
             e.preventDefault();
@@ -51,7 +51,7 @@ function PostEdit(props) {
                 content: ""
               })
             }
-        }}>
+          }}>
           <div className='post-detail-header'>
             <input
               autoFocus
@@ -73,19 +73,19 @@ function PostEdit(props) {
             />
           </div>
           {error && (
-              <div className='error-container'>
-                <div className='error'>
-                  {error.map((error, idx)=>(<h6 key={idx}>{error}</h6>))}
-                </div>
+            <div className='error-container'>
+              <div className='error'>
+                {error.map((error, idx) => (<h6 key={idx}>{error}</h6>))}
               </div>
-              )}
+            </div>
+          )}
           <button className='post-edit-button'>Submit</button>
           <div className='post-detail-extra'>
             <h6> {post._count.likes} {post._count.likes === 1 ? ' Like' : ' Likes'}</h6>
             <h6>{post._count.comments}{post._count.comments === 1 ? ' Comment' : ' Comments'}</h6>
           </div>
         </form>) : (
-          <h1>Loading...</h1>
+        <h1>Loading...</h1>
       )}
     </div>
   );
