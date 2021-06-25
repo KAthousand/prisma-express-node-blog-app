@@ -12,11 +12,11 @@ function CommentCard(props) {
   const destroyComment = async (id) => {
     await deleteComment(id)
     const post = await getOnePost(postId);
-      const date = `${post.createdAt}`
-      const replaceDate = new Date(Date.parse(`${date}`));
-      const newDate = replaceDate.toLocaleString();
-      setPost(post)
-      setPost((prevState) => ({ ...prevState, createdAt: newDate }))
+    const date = `${post.createdAt}`
+    const replaceDate = new Date(Date.parse(`${date}`));
+    const newDate = replaceDate.toLocaleString();
+    setPost(post)
+    setPost((prevState) => ({ ...prevState, createdAt: newDate }))
   }
 
   return (
@@ -28,8 +28,11 @@ function CommentCard(props) {
       </div>
       <div className='comment-card-extra'>
         <h6>{likes} {likes === 1 ? 'like' : 'likes'}</h6>
-        {currentUser.id === userId &&
-          <button onClick={()=>destroyComment(id)}><h6>Delete Comment</h6></button>}
+        {currentUser &&
+          (currentUser.id === userId) ? (
+          <button onClick={() => destroyComment(id)}><h6>Delete Comment</h6></button>
+        ) : ("")
+        }
       </div>
     </div>
   );

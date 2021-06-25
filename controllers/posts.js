@@ -22,6 +22,14 @@ const getAllPosts = async (req, res) => {
             id: true
           }
         },
+        likes: {
+          select: {
+            id: true,
+            userId: true,
+            postId: true,
+            commentId: true
+          }
+        },
         _count: {
           select: {
             likes: true,
@@ -69,6 +77,7 @@ const getPostById = async (req, res) => {
             id: true
           }
         },
+        likes: true,
         _count: {
           select: {
             likes: true,
@@ -83,7 +92,7 @@ const getPostById = async (req, res) => {
   }
 }
 
-const createPost = async (req, res) => { 
+const createPost = async (req, res) => {
   try {
     const post = await prisma.post.create({
       data: {
@@ -93,7 +102,7 @@ const createPost = async (req, res) => {
     })
     res.status(200).json(post)
   } catch (error) {
-    return res.status(500).json({error: error.message})
+    return res.status(500).json({ error: error.message })
   }
 }
 
@@ -101,7 +110,7 @@ const updatePost = async (req, res) => {
   try {
     const { id } = req.params;
     const post = await prisma.post.update({
-      
+
       where: { id: Number(id) },
       data: {
         title: req.body.title,

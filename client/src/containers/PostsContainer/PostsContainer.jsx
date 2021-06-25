@@ -85,6 +85,7 @@ function PostsContainer(props) {
         <Posts
           currentUser={currentUser}
           posts={posts}
+          resetPosts={resetPosts}
         />
       </Route>
     </Switch>

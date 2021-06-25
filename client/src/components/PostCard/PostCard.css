@@ -37,3 +37,9 @@
   align-items: center;
   height: 20%;
 }
+
+.likes-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

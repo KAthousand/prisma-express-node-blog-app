@@ -1,0 +1,8 @@
+.like-button{
+  margin-right: 5px;
+}
+
+.liked{
+  background-color: red;
+  border: none;
+}

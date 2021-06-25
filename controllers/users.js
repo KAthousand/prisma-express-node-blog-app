@@ -9,11 +9,11 @@ const getAllUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany({
       // select: {
-        // username: true,
-        // email: true,
-        // posts: true,
-        // comments: true,
-        // likes: true,
+      // username: true,
+      // email: true,
+      // posts: true,
+      // comments: true,
+      // likes: true,
       // }
     })
     res.status(200).json(users)
@@ -32,6 +32,7 @@ const getUserById = async (req, res) => {
       select: {
         username: true,
         email: true,
+        likes: true
       }
     })
     res.status(200).json(users)
@@ -40,7 +41,7 @@ const getUserById = async (req, res) => {
   }
 }
 
-const createUser = async (req, res) => { 
+const createUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = await prisma.user.create({
@@ -56,9 +57,9 @@ const createUser = async (req, res) => {
       }
     })
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_KEY)
-    res.status(200).json({accessToken: accessToken, user: user})
+    res.status(200).json({ accessToken: accessToken, user: user })
   } catch (error) {
-    return res.status(500).json({error: error.message})
+    return res.status(500).json({ error: error.message })
   }
 }
 
